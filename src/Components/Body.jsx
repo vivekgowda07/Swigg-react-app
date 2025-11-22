@@ -1,9 +1,13 @@
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "../Components/Shimmer";
 import { useState, useEffect } from "react";
+import Header from "../Components/Header";
 
 const Body = () => {
   const [ListofRestaurant, setListofRestaurant] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+
+  const [searchTxt, setSearchtext] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -19,6 +23,9 @@ const Body = () => {
     setListofRestaurant(
       jsonn.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredRestaurant(
+      jsonn.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   if (ListofRestaurant.length === 0) {
@@ -27,9 +34,24 @@ const Body = () => {
 
   return (
     <>
+      <Header />
       <div className="search">
-        <input />
-        <button>Search</button>
+        <input
+          type="text"
+          className="search-box"
+          value={searchTxt}
+          onChange={(e) => setSearchtext(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            const filteredRestourants = ListofRestaurant.filter((res) =>
+              res.info.name.toLowerCase().includes(searchTxt.toLowerCase())
+            );
+            setFilteredRestaurant(filteredRestourants);
+          }}
+        >
+          Search
+        </button>
         <button
           className="filter-button"
           onClick={() => {
@@ -44,7 +66,7 @@ const Body = () => {
       </div>
 
       <div className="res-container">
-        {ListofRestaurant.map((restaurant) => (
+        {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
