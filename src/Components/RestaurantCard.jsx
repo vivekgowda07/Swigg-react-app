@@ -1,16 +1,22 @@
-const RestaurantCard = () => {
+import { CDN_IMG } from "../Utils/constants";
+
+const RestaurantCard = (props) => {
+  const { resData } = props;
+  const { cloudinaryImageId, name, cuisines, avgRating, costForTwo } =
+    resData.info;
   return (
     <>
       <div className="res-card">
         <img
           className="res-img"
-          src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/b61937637b1066762d041c3f479e6ee6"
+          src={CDN_IMG + cloudinaryImageId}
           alt="restaurant"
         />
-        <h2>Restarant Name</h2>
-        <h3>Dosa, Breakfast</h3>
-        <h3>4.4 Rating</h3>
-        <h3>35 Minuets</h3>
+        <h2>{name}</h2>
+        <h3>{cuisines.join(", ")}</h3>
+        <h3>{costForTwo} </h3>
+        <h3>{avgRating} Ratings</h3>
+        <h3>{resData.info.sla.deliveryTime} Minutes to Deliver</h3>
       </div>
     </>
   );
