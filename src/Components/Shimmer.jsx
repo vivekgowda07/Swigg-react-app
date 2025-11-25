@@ -1,7 +1,6 @@
 const Shimmer = () => {
   return (
     <>
-      <div className="header-container-shimmer"></div>
       <div className="search">
         <input />
         <button>Loading..</button>

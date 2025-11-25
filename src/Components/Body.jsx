@@ -23,9 +23,6 @@ const Body = () => {
     setListofRestaurant(
       jsonn.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    setFilteredRestaurant(
-      jsonn.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
   };
 
   if (ListofRestaurant.length === 0) {
@@ -34,7 +31,6 @@ const Body = () => {
 
   return (
     <>
-      <Header />
       <div className="search">
         <input
           type="text"
